@@ -1,0 +1,12 @@
+{
+  "name": "Dr Plant",
+  "description": "Professional AI plant health assistant featuring real-time disease detection, treatment suggestions, and an AI chatbot. Built with React, Firebase, and Google Gemini AI.",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "majorCapabilities": [
+    "AI Vision Diagnosis",
+    "Multi-Platform Support",
+    "Disease treatment database"
+  ]
+}

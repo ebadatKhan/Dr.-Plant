@@ -1,0 +1,75 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "Public and private user information",
+      "type": "object",
+      "properties": {
+        "displayName": { "type": "string" },
+        "nickname": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "photoURL": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["displayName", "nickname", "email", "createdAt"]
+    },
+    "Scan": {
+      "title": "Plant Diagnosis Scan",
+      "description": "Results of an AI plant diagnosis",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "diseaseName": { "type": "string" },
+        "confidence": { "type": "number" },
+        "image": { "type": "string", "description": "Base64 or URL of the image" },
+        "description": { "type": "string" },
+        "causes": { "type": "array", "items": { "type": "string" } },
+        "treatment": { "type": "array", "items": { "type": "string" } },
+        "prevention": { "type": "array", "items": { "type": "string" } },
+        "severity": { "type": "string", "enum": ["Low", "Medium", "High"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "diseaseName", "confidence", "image", "createdAt"]
+    },
+    "Chat": {
+      "title": "Chat Conversation",
+      "description": "A conversation with the AI bot",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "lastMessage": { "type": "string" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "updatedAt"]
+    },
+    "ChatMessage": {
+      "title": "Chat Message",
+      "description": "A single message in a conversation",
+      "type": "object",
+      "properties": {
+        "role": { "type": "string", "enum": ["user", "model"] },
+        "text": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["role", "text", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles"
+    },
+    "/scans/{scanId}": {
+      "schema": "Scan",
+      "description": "Plant scan records"
+    },
+    "/chats/{chatId}": {
+      "schema": "Chat",
+      "description": "Conversations"
+    },
+    "/chats/{chatId}/messages/{messageId}": {
+      "schema": "ChatMessage",
+      "description": "Message history"
+    }
+  }
+}
